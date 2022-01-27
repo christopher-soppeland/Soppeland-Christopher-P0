@@ -2,6 +2,8 @@ package com.revature.expenseReimburesment.ui;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import com.revature.expenseReimburesment.bl.EmployeeBL;
 import com.revature.expenseReimburesment.bl.IRefundBL;
 import com.revature.expenseReimburesment.bl.RefundBL;
@@ -16,6 +18,8 @@ public class MainMenu {
 	private EmployeeBL employeeBL;
 	private Employee employee;
 	private Reimbursement foundRequest;
+	private String output;
+	private String title = "Reimbursement System";
 
 	public MainMenu(Scanner myScanner, IRefundBL refundBL, EmployeeBL employeeBL) {
 		this.myScanner = myScanner;
@@ -27,52 +31,87 @@ public class MainMenu {
 		// method signature : access modifier*, non access modifier*, return type,
 		// methodName, (arguments), throws exceptions*
 		boolean keepGoing = true;
+		
 		do {
-			System.out.println("Reimbursement System\n");
+			// System.out.println("Reimbursement System");
 
-			while (employee == null) {
-				System.out.println("What is your employee id?");
-				userInput = myScanner.nextLine();
-				try {
-					/*int test = Integer.parseInt(userInput);
-					System.out.println(test + " " + ((Object) test).getClass().getSimpleName());*/
-					
-					employee = employeeBL.getEmpById(Integer.parseInt(userInput));
-					System.out.println(employee);
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					System.out.println("Please only enter numerics");
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					System.out.println("No such employee found, try another id");
+			while (employee == null & keepGoing) {
+
+				/*
+				 * System.out.println("What is your employee id?"); userInput =
+				 * myScanner.nextLine();
+				 */
+
+				output = "What is your employee id?";
+				userInput = JOptionPane.showInputDialog(null, output, title, 1);
+				if (userInput != null) {
+					try {
+						employee = employeeBL.getEmpById(Integer.parseInt(userInput));
+						// System.out.println(employee);
+						JOptionPane.showMessageDialog(null, employee, title, 1);
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						// System.out.println("Please only enter numerics");
+						JOptionPane.showMessageDialog(null, "Please only enter numerics", title, 0);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						// System.out.println("No such employee found, try another id");
+						JOptionPane.showMessageDialog(null, "No such employee found, try another id", title, 0);
+					}
+				} else {
+					keepGoing = false;
+					break;
 				}
 			}
 
-			System.out.println("What do you wanna do?");
-			System.out.println("[0] Submit Reimbursement Request");
-			if (employee.isManager()) {
-				System.out.println("[1] View Reimbursement Requests");
-				System.out.println("[2] Update Reimbursement Request");
-			}
-			System.out.println("[x] Exit");
+			if (employee != null) {
+				//System.out.println("What do you want do?");
+				output = "What do you want do?\n\n";
+				//System.out.println("[0] Submit Reimbursement Request");
+				output += "[0] Submit Reimbursement Request\n";
+				
+				if (employee.isManager()) {
+					//System.out.println("[1] View Reimbursement Requests");
+					output += "[1] View Reimbursement Requests\n";
+					//System.out.println("[2] Update Reimbursement Request");
+					output += "[2] Update Reimbursement Request\n";
+					//System.out.println("[3] View All Employees");
+					output += "[3] View All Employees\n";
+				} else {
+					//System.out.println("[1] View Your Reimbursement Requests");
+					output += "[1] View Your Reimbursement Requests\n";
+				}
+				System.out.println("[x] Exit");
+				output += "[x] Exit\n";
 
-			userInput = myScanner.nextLine();
-			switch (userInput) {
-			case "0":
-				createRequest();
-				break;
-			case "1":
-				getRefunds();
-				break;
-			case "2":
-				getSpecificRequest();
-				break;
-			case "x":
-				System.out.println("Goodbye");
+				//userInput = myScanner.nextLine();
+				userInput = JOptionPane.showInputDialog(null, output, title, 1);
+				
+				switch (userInput) {
+				case "0":
+					createRequest();
+					break;
+				case "1":
+					getRefunds();
+					break;
+				case "2":
+					getSpecificRequest();
+					break;
+				case "3":
+					getEmployees();
+					break;
+				case "x":
+					//System.out.println("Goodbye");
+					JOptionPane.showMessageDialog(null, "Goodbye", title, 1);
+					keepGoing = false;
+					break;
+				default:
+					//System.out.println("Sorry wrong input, please try again");
+					JOptionPane.showMessageDialog(null, "Sorry wrong input, please try again", title, 0);
+					break;
+				}
+			} else {
 				keepGoing = false;
-				break;
-			default:
-				System.out.println("Sorry wrong input, please try again");
 				break;
 			}
 
@@ -88,13 +127,21 @@ public class MainMenu {
 
 		boolean keepGoing = true;
 		do {
-			System.out.println("What type of expense is this for?");
-			System.out.println("[1] Lodging");
-			System.out.println("[2] Travel");
-			System.out.println("[3] Food");
-			System.out.println("[4] Other");
-			System.out.println("[x] Exit");
-			userInput = myScanner.nextLine();
+			//System.out.println("What type of expense is this for?");
+			output = "What type of expense is this for?\n";
+			//System.out.println("[1] Lodging");
+			output += "[1] Lodging\n";
+			//System.out.println("[2] Travel");
+			output += "[2] Travel\n";
+			//System.out.println("[3] Food");
+			output += "[3] Food\n";
+			//System.out.println("[4] Other");
+			output += "[4] Other\n";
+			//System.out.println("[x] Exit");
+			output += "[x] Exit\n";
+			//userInput = myScanner.nextLine();
+			userInput = JOptionPane.showInputDialog(null, output, title, 1);
+			
 			switch (userInput) {
 			case "1":
 				type = "Lodging";
@@ -109,38 +156,52 @@ public class MainMenu {
 				type = "Other";
 				break;
 			case "x":
-				System.out.println("Goodbye");
+				//System.out.println("Goodbye");
+				JOptionPane.showMessageDialog(null, "Goodbye", title, 1);
 				keepGoing = false;
 				break;
 			default:
-				System.out.println("Sorry wrong input, please try again");
+				//System.out.println("Sorry wrong input, please try again");
+				JOptionPane.showMessageDialog(null, "Sorry wrong input, please try again", title, 0);
 				break;
 			}
 
 			if (keepGoing) {
-				System.out.println("How much was the expense?: ");
-				String input = myScanner.nextLine();
+				//System.out.println("How much was the expense?: ");
+				//userInput = myScanner.nextLine();
+				output = "How much was the expense?:\n";
+				userInput = JOptionPane.showInputDialog(null, output, title, 1);
 				try {
-					amount = Double.parseDouble(input);
+					amount = Double.parseDouble(userInput);
 					keepGoing = false;
 				} catch (NumberFormatException e1) {
-					System.out.println("Please enter numbers only.");
+					//System.out.println("Please enter numbers only.");
+					JOptionPane.showMessageDialog(null, "Please enter numbers only.", title, 0);
 				}
 			}
 
 			Reimbursement newReimbursement = new Reimbursement(id, type, amount);
 			// saving to storage
 			refundBL.addReimbursement(newReimbursement);
-			System.out.println(newReimbursement);
+			//System.out.println(newReimbursement);
+			JOptionPane.showMessageDialog(null, newReimbursement, title, 1);
 
 		} while (keepGoing);
 	}
 
 	private void getRefunds() {
+		output = "";
 		// TODO Auto-generated method stub
 		for (Reimbursement refund : refundBL.getRefunds()) {
-			System.out.println(refund);
+			if (employee.isManager()) {
+				//System.out.println(refund);
+				output += refund + "\n";
+			} else if (refund.getEmpId() == employee.getEmpId()) {
+				//System.out.println(refund);
+				output += refund + "\n";
+			}
 		}
+		JOptionPane.showMessageDialog(null, output, title, 1);
 	}
 
 	private void getEmployees() {
@@ -171,7 +232,7 @@ public class MainMenu {
 			System.out.println("No such request found, try another id");
 		}
 
-		System.out.println("Would you like to change the statu of this request?");
+		System.out.println("Would you like to change the status of this request?");
 		System.out.println("[y] Yes");
 		System.out.println("[n] No");
 		String userInput = myScanner.nextLine();

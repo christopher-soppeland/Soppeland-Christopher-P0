@@ -16,15 +16,15 @@ public class Data implements IData{
 		// seeding my list of issues with dummy data
 		//Reimbursement dummy data
 		listOfRequests = new ArrayList<Reimbursement>(){{
-			add(new Reimbursement(1, "Lodging", 200.00));
-			add(new Reimbursement(2, "Food", 12.00));
+			add(new Reimbursement(1, "Lodging", 200.00, "PENDING", "hotel", 1002));
+			add(new Reimbursement(2, "Food", 12.00, "PENDING", "dinner", 1001));
 		}};
 		latestId = 3;
 		
 		//Employee dummy data
 		listOfEmployees = new ArrayList<Employee>(){{
-			add(new Employee(8352, false, "Bill Stearn"));
-			add(new Employee(0001, true, "Bobby Axelrod"));
+			add(new Employee(1002, false, "Bill Stearn", 1001));
+			add(new Employee(1001, true, "Bobby Axelrod"));
 		}};
 	}
 	
