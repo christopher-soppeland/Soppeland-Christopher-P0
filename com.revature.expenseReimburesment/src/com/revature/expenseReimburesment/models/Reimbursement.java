@@ -1,5 +1,7 @@
 package com.revature.expenseReimburesment.models;
 
+import javax.swing.JTable;
+
 public class Reimbursement {
 
 	private int id;
@@ -94,8 +96,15 @@ public class Reimbursement {
 
 	@Override
 	public String toString() {
-		return "Reimbursement [id=" + id + ", type=" + type + ", amount=" + amount + ", status=" + status
+		String output = "Reimbursement [";
+		if(id != 0) {
+			output += "id=" + id + ", "; 
+		}
+		output += "type=" + type + ", amount=" + amount + ", status=" + status
 				+ ", description=" + description + ", employee id=" + empId + "]";
+		
+		JTable table = new JTable();
+		return output;
 	}
 
 }
