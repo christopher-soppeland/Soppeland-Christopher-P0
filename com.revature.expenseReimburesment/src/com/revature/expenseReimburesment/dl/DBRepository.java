@@ -50,6 +50,12 @@ public class DBRepository implements IData{
 		// TODO Auto-generated method stub
 		return employeeDAO.findById(id);
 	}
+
+	@Override
+	public void addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		employeeDAO.add(employee);
+	}
 	
 
 }

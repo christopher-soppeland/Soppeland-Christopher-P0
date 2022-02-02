@@ -23,5 +23,9 @@ public class EmployeeBL {
 		// TODO Auto-generated method stub
 		return repo.getEmpById(id);
 	}
+	
+	public void addEmployee(Employee employee) {
+		repo.addEmployee(employee);
+	}
 
 }

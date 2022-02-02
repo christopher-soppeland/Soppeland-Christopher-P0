@@ -13,4 +13,5 @@ public interface IData {
 	void changeStatus(Reimbursement reimbursement);
 	List<Employee> getEmployees();
 	Employee getEmpById(int id) throws Exception;
+	void addEmployee(Employee employee);
 }

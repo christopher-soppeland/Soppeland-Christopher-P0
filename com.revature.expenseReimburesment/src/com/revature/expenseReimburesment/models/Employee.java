@@ -1,7 +1,5 @@
 package com.revature.expenseReimburesment.models;
 
-import javax.swing.JTable;
-
 public class Employee {
 
 	private boolean manager = false;
@@ -13,12 +11,14 @@ public class Employee {
 
 	}
 
-	/*
-	 * public Employee(int empId) { this.empId = empId; }
-	 * 
-	 * public Employee(int empId, boolean manager) { this(empId); this.manager =
-	 * manager; }
-	 */
+	public Employee(int empId) {
+		this.empId = empId;
+	}
+
+	public Employee(int empId, boolean manager) {
+		this(empId);
+		this.manager = manager;
+	}
 
 	public Employee(int empId, boolean manager, String name) {
 		// this(empId, manager);
@@ -66,17 +66,12 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		//String emp = "Employee [employee id=" + empId + ", manager=" + manager + ", name=" + name;
-		String emp[] = new String[3];
-		
-		emp[0] = String.valueOf(empId);
-		emp[1] = String.valueOf(manager);
-		emp[2] = name;
-		/*if(manId != 0) {
+		String emp = "Employee [employee id=" + empId + ", manager=" + manager + ", name=" + name;
+		if (manId != 0) {
 			emp += ", manager id=" + manId;
 		}
-		emp += "]"*/;
-		
+		emp += "]";
+
 		return emp;
 	}
 

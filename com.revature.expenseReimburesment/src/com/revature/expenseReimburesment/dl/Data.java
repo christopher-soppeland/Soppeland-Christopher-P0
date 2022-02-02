@@ -88,4 +88,11 @@ public class Data implements IData{
 		return foundEmployee;
 	}
 
+	@Override
+	public void addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		
+		//return employee;
+	}
+
 }

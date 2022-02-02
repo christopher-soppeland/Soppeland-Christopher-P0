@@ -3,7 +3,6 @@ package com.revature.expenseReimburesment.ui;
 //import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 import com.revature.expenseReimburesment.bl.EmployeeBL;
 import com.revature.expenseReimburesment.bl.IRefundBL;
@@ -19,10 +18,9 @@ public class MainMenu {
 	private Employee employee;
 	private Reimbursement foundRequest;
 	private String output;
-	private IODialogs dialog = new IODialogs();
+	// private IODialogs dialog = new IODialogs();
 	private String title = "Reimbursement System";
-	private String[] options = new String[6];
-	JTable table;
+	private String[] options = new String[7];
 
 	public MainMenu(/* Scanner myScanner, */IRefundBL refundBL, EmployeeBL employeeBL) {
 		// this.myScanner = myScanner;
@@ -80,12 +78,15 @@ public class MainMenu {
 					options[3] = "Update Reimbursement Request";
 					// System.out.println("[3] View All Employees");
 					options[4] = "View All Employees";
+					options[5] = "Add Employee";
+					options[6] = "Exit";
 				} else {
 					// System.out.println("[1] View Your Reimbursement Requests");
 					options[2] = "View Your Reimbursement Requests";
+					options[3] = "Exit";
 				}
 				// System.out.println("[x] Exit");
-				options[5] = "Exit";
+				
 
 				// userInput = myScanner.nextLine();
 				userInput = (String) JOptionPane.showInputDialog(null, output, title, 1, null, options, options[0]);
@@ -106,6 +107,9 @@ public class MainMenu {
 						break;
 					case "View All Employees":
 						getEmployees();
+						break;
+					case "Add Employee":
+						addEmployee();
 						break;
 					case "Exit":
 						// System.out.println("Goodbye");
@@ -227,20 +231,40 @@ public class MainMenu {
 
 	private void getEmployees() {
 		// TODO Auto-generated method stub
-		int count = 1;
 		output = "";
-		
+
 		for (Employee employee : employeeBL.getEmployees()) {
 			// System.out.println(employee);
 			output += employee + "\n";
-			count++;
 		}
-		
-		String[][] data = new String[count][3];
-		String[] columnNames = { "Employee Id", "Manager", "Name" };
-		table = new JTable(data, columnNames);
-		
 		JOptionPane.showMessageDialog(null, output, title, 1);
+	}
+
+	private void addEmployee() {
+		boolean is_manager = false;
+		int id = 0;
+		String name;
+		int man_id = 0;
+		boolean keepGoing = true;
+		String[] options = { "Yes", "No" };
+		
+		userInput = (String) JOptionPane.showInputDialog(null, "Is this employee a manager?\n", title, 1, null, options,
+				options[1]);
+		if (userInput == "Yes") {
+			is_manager = true;
+		} else {
+			is_manager = false;
+			man_id = Integer.parseInt(
+					JOptionPane.showInputDialog(null, "What is the ID of this employee's manager?\n", title, 1));
+		}
+		name = JOptionPane.showInputDialog(null, "Employee Name:\n", title, 1);
+		
+		Employee newEmployee = new Employee(id, is_manager, name, man_id);
+		
+		employeeBL.addEmployee(newEmployee);
+		
+		JOptionPane.showMessageDialog(null, "Employee Successfully\n" + newEmployee,
+				title, 1);
 	}
 
 	private void getSpecificRequest() {

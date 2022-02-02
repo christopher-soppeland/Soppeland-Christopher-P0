@@ -1,6 +1,5 @@
 package com.revature.expenseReimburesment.models;
 
-import javax.swing.JTable;
 
 public class Reimbursement {
 
@@ -103,7 +102,6 @@ public class Reimbursement {
 		output += "type=" + type + ", amount=" + amount + ", status=" + status
 				+ ", description=" + description + ", employee id=" + empId + "]";
 		
-		JTable table = new JTable();
 		return output;
 	}
 

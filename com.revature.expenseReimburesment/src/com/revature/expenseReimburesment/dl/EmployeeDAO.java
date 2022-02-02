@@ -69,7 +69,7 @@ public class EmployeeDAO implements DAO<Employee, Integer>{
 		// TODO Auto-generated method stub
 		try(Connection conn= ConnectionFactory.getInstance().getConnection())
 		{
-			String query = "insert into employees (name, is_manager, manager_id) values (?,?);";
+			String query = "insert into employees (name, is_manager, manager_id) values (?,?,?);";
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, newObject.getName());
 			pstmt.setBoolean(2, newObject.isManager());
