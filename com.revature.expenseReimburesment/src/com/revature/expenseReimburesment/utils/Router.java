@@ -20,11 +20,13 @@ public class Router {
 	public void setUpEndPoints() {
 		app.get("/Employees", OpenApiBuilder.documented(DocumentationFactory.getDoc("getEmployees"), employeeController.getAll()));
 		app.get("/Employees/{employee_id}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getEmployeeById"), employeeController.getById()));
-		app.post("/Employees",  OpenApiBuilder.documented(DocumentationFactory.getDoc("addEmployee"), employeeController.add()));
+		app.post("/AddEmployee",  OpenApiBuilder.documented(DocumentationFactory.getDoc("addEmployee"), employeeController.add()));
 		app.get("/Requests", OpenApiBuilder.documented(DocumentationFactory.getDoc("getRefunds"), refundController.getAll()));
-		app.post("/Requests", OpenApiBuilder.documented(DocumentationFactory.getDoc("addReimbursement"), refundController.add()));
-		app.put("/Requests/{refund_id}/{status}", OpenApiBuilder.documented(DocumentationFactory.getDoc("changeStatus"), refundController.update()));
-		app.get("/Requests/{refund_id}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getRefundById"), refundController.getById()));
+		app.post("/AddRequest", OpenApiBuilder.documented(DocumentationFactory.getDoc("addReimbursement"), refundController.add()));
+		app.put("/UpdateRequest/{refund_id}/{status}", OpenApiBuilder.documented(DocumentationFactory.getDoc("changeStatus"), refundController.update()));
+		app.get("/RequestsByStatus/{status}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getRefundByStatus"), refundController.getByStatus()));
+		app.get("/RequestsByEmployee/{employee_id}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getByEmpId"), refundController.getByEmpId()));
+		app.get("/RequestsById/{refund_id}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getRefundById"), refundController.getById()));
 	}
 
 }

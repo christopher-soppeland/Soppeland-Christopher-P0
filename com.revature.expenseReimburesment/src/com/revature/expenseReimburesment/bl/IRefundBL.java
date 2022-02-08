@@ -10,5 +10,6 @@ public interface IRefundBL {
 	List<Reimbursement> getRefunds();
 	Reimbursement getRefundById(int id) throws Exception;
 	void changeStatus(Reimbursement reimbursement) throws Exception;
+	List<Reimbursement> getRefundByStatus(String status) throws Exception;
 
 }

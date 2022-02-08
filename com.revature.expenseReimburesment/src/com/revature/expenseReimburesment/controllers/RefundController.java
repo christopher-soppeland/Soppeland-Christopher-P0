@@ -21,6 +21,7 @@ public class RefundController implements IController {
 			// marshalling my list of requests to a json format
 			// jsonStream() sets the response body to json
 			ctx.jsonStream(refundBL.getRefunds());
+			ctx.status(201);
 		};
 	}
 
@@ -34,6 +35,7 @@ public class RefundController implements IController {
 			int actualId = Integer.parseInt(id);
 			try {
 				ctx.jsonStream(refundBL.getRefundById(actualId));
+				ctx.status(201);
 			} catch (NullPointerException ex)
 			{
 				ctx.status(204);
@@ -71,7 +73,27 @@ public class RefundController implements IController {
 			Reimbursement foundRequest = refundBL.getRefundById(refundId);
 			foundRequest.setStatus(status);
 			refundBL.changeStatus(foundRequest);
-			ctx.status(204);
+			ctx.status(201);
+		};
+	}
+
+	@Override
+	public Handler getByStatus() {
+		// TODO Auto-generated method stub
+		return ctx -> {
+			String status = ctx.pathParam("status");
+			ctx.jsonStream(refundBL.getRefundByStatus(status));
+			ctx.status(201);
+		};
+	}
+
+	@Override
+	public Handler getByEmpId() {
+		// TODO Auto-generated method stub
+		return ctx -> {
+			Integer empId = Integer.parseInt(ctx.pathParam("employee_id"));
+			ctx.jsonStream(refundBL.getRefundByEmpId(empId));
+			ctx.status(201);
 		};
 	}
 

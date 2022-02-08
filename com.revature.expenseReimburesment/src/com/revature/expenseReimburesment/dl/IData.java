@@ -14,4 +14,6 @@ public interface IData {
 	List<Employee> getEmployees();
 	Employee getEmpById(int id) throws Exception;
 	void addEmployee(Employee employee);
+	List<Reimbursement> getRefundByStatus(String status) throws Exception;
+	List<Reimbursement> getRefundByEmpId(Integer empId) throws Exception;
 }

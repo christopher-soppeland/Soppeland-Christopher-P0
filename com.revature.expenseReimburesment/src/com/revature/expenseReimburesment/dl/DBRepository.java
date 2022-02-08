@@ -7,10 +7,10 @@ import com.revature.expenseReimburesment.models.Reimbursement;
 
 public class DBRepository implements IData{
 	
-	private DAO<Reimbursement, Integer> refundDAO;
-	private DAO<Employee, Integer> employeeDAO;
+	private DAO<Reimbursement, Integer, String> refundDAO;
+	private DAO<Employee, Integer, String> employeeDAO;
 	
-	public DBRepository(DAO<Reimbursement,Integer> refundDAO, DAO<Employee,Integer> employeeDAO) {
+	public DBRepository(DAO<Reimbursement,Integer,String> refundDAO, DAO<Employee,Integer,String> employeeDAO) {
 		this.refundDAO = refundDAO;
 		this.employeeDAO = employeeDAO;
 	}
@@ -55,6 +55,18 @@ public class DBRepository implements IData{
 	public void addEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		employeeDAO.add(employee);
+	}
+
+	@Override
+	public List<Reimbursement> getRefundByStatus(String status) throws Exception {
+		// TODO Auto-generated method stub
+		return refundDAO.findByStatus(status);
+	}
+
+	@Override
+	public List<Reimbursement> getRefundByEmpId(Integer empId) throws Exception {
+		// TODO Auto-generated method stub
+		return refundDAO.findByEmpId(empId);
 	}
 	
 

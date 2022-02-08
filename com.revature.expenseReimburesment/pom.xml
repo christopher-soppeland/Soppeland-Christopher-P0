@@ -64,5 +64,10 @@
 			<artifactId>javalin-openapi</artifactId>
 			<version>4.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue</artifactId>
+			<version>2.6.10</version>
+		</dependency>
 	</dependencies>
 </project>

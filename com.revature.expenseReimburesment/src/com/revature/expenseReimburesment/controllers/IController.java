@@ -8,5 +8,7 @@ public interface IController {
 	Handler getById();
 	Handler add();
 	Handler update();
+	Handler getByStatus();
+	Handler getByEmpId();
 
 }

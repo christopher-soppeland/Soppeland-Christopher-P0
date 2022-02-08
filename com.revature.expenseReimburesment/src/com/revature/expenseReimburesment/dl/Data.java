@@ -95,4 +95,32 @@ public class Data implements IData{
 		//return employee;
 	}
 
+	@Override
+	public List<Reimbursement> getRefundByStatus(String status) throws Exception {
+		// TODO Auto-generated method stub
+		for(Reimbursement request:listOfRequests)
+		{
+			if(request.getStatus() == status)
+			{
+				listOfRequests.add(request);
+			}
+		}
+		
+		return listOfRequests;
+	}
+
+	@Override
+	public List<Reimbursement> getRefundByEmpId(Integer empId) throws Exception {
+		// TODO Auto-generated method stub
+		for(Reimbursement request:listOfRequests)
+		{
+			if(request.getEmpId() == empId)
+			{
+				listOfRequests.add(request);
+			}
+		}
+		
+		return listOfRequests;
+	}
+
 }

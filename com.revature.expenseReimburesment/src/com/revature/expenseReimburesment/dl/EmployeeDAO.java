@@ -12,8 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.expenseReimburesment.models.Employee;
+import com.revature.expenseReimburesment.models.Reimbursement;
 
-public class EmployeeDAO implements DAO<Employee, Integer>{
+public class EmployeeDAO implements DAO<Employee, Integer, String>{
 	private final Logger logger = LogManager.getLogger(this.getClass());
 
 	@Override
@@ -83,6 +84,19 @@ public class EmployeeDAO implements DAO<Employee, Integer>{
 
 	@Override
 	public void update(Employee newObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Reimbursement> findByEmpId(Integer empId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> findByStatus(String status) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

@@ -26,6 +26,7 @@ public class RESTDriver {
 				new RefundBL(new DBRepository(new RefundDAO(), new EmployeeDAO())));
 		Javalin app = Javalin.create(config -> {
 			config.registerPlugin(new OpenApiPlugin(getOpenApiOptions()));
+			config.enableCorsForAllOrigins();
 		}).start(7001);
 		Router router = new Router(app, employeeController, refundController);
 		router.setUpEndPoints();
@@ -35,8 +36,8 @@ public class RESTDriver {
 		// Configuring swagger
 		// We'll use swagger for documentation and testing our API
 		Info applicationInfo = new Info().version("1.0").description("Reimburesment System REST");
-		return new OpenApiOptions(applicationInfo).path("/swagger-docs")
-				.swagger(new SwaggerOptions("/swagger").title("Reimburesment System API Docs"));
+		return new OpenApiOptions(applicationInfo).path("/reimburesment-docs")
+				.swagger(new SwaggerOptions("/Reimbursements").title("Reimburesment System API Docs"));
 	}
 
 }

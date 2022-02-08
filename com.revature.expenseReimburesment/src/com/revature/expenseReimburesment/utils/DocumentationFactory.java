@@ -41,6 +41,14 @@ public class DocumentationFactory {
 			return OpenApiBuilder.document().operation(op -> {
 				op.addTagsItem("Reimburesment");
 			}).json("200", Reimbursement.class);
+		case "getRefundByStatus":
+			return OpenApiBuilder.document().operation(op -> {
+				op.addTagsItem("Reimburesment");
+			}).json("200", Reimbursement.class);
+		case "getByEmpId":
+			return OpenApiBuilder.document().operation(op -> {
+				op.addTagsItem("Reimburesment");
+			}).json("200", Reimbursement.class);
 		default:
 			return null;
 		}

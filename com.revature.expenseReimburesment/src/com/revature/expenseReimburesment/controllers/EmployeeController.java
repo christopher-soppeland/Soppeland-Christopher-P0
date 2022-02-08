@@ -68,4 +68,16 @@ public class EmployeeController implements IController {
 		return null;
 	}
 
+	@Override
+	public Handler getByStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Handler getByEmpId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
