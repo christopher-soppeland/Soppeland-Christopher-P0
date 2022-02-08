@@ -67,7 +67,7 @@ function getEmployee(){
             }
             else{
                 document.getElementById('activeDisplay').innerHTML = document.getElementById('employeeOptions').innerHTML;
-                document.getElementById('employeeOptions').innerHTML = '';
+                //document.getElementById('employeeOptions').innerHTML = '';
             }
 
             document.getElementById('userInput').innerHTML = "What would you like to do?";
@@ -95,8 +95,9 @@ function start(){
     else if(selectedAction == "viewRequests"){
         document.getElementById('activeDisplay').innerHTML = document.getElementById('viewRequestsInput').innerHTML;
     }
-    else if(selectedAction == "updateRequest"){
-        updateRequest();
+    else if(selectedAction == "viewYourRequests"){
+        //alert(empId);
+        viewYourRequests();
     }
     else if(selectedAction == "viewEmployees"){
         viewEmployees();
@@ -233,6 +234,40 @@ function viewRequestsByEmpId(){
     }
 }
 
+function viewYourRequests(){
+    document.getElementById('userInput').innerHTML = "Request Data";
+    let output = '';
+    let req;
+
+    xhr = new XMLHttpRequest();
+    xhr.open('GET', `http://localhost:7001/RequestsByEmployee/${empId}`, true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        // check if the response is received AND the status code is successful
+        if (xhr.readyState == 4 && xhr.status == 201)
+        {
+            let requests = JSON.parse(xhr.responseText);
+
+            Object.entries(requests).forEach((request) => {
+                req = request[1];
+
+                output += "<tr>";
+                output += '<th scope="row">' + req.id + '</th>';
+                output += '<td>' + req.type + '</td>';
+                output += '<td>' + req.description + '</td>';
+                output += '<td>' + req.amount + '</td>';
+                output += '<td>' + req.status + '</td>';
+                output += '<td>' + req.empId + '</td>';
+                output += "</tr>";
+            });
+
+            document.getElementById("requestOutputBody").innerHTML = output;
+            document.getElementById("activeDisplay").innerHTML = document.getElementById("requestOuput").innerHTML;
+        }
+    }
+    
+}
+
 function updateRequest(id){
     let statusOption = document.getElementById(id);
     let status = statusOption.options[statusOption.selectedIndex].value;
@@ -282,9 +317,10 @@ function viewEmployees(){
 
 function addEmployee(){
     let name = document.getElementById("employeeName").value;
-    let managerId = document.getElementById("managerId").value;
-    let isManagerOption = document.getElementById('isManager');
+    let manId = document.getElementById("managerIdInput").value;
+    let isManagerOption = document.getElementById("isManager");
     let isManager = isManagerOption.options[isManagerOption.selectedIndex].value;
+    alert(manId);
 
     url = "http://localhost:7001/AddEmployee";
     xhr = new XMLHttpRequest();
@@ -298,11 +334,11 @@ function addEmployee(){
             console.log(xhr.responseText);
         }};
 
-    data = '{ "name": ' + '"' + name + '"' + 
-            ', "manId": ' + '"' + managerId + '"' + 
-            ', "manager": ' + '"' +  isManager + '"' +
-            '}';
-    xhr.send(data);
+        data = '{ "name": ' + '"' + name + '"' + 
+                ', "manId": ' + '"' + manId + '"' + 
+                ', "manager": ' + '"' +  isManager + '"' +
+                '}';
+        xhr.send(data);
 
     document.getElementById("employeeName").value = '';
     document.getElementById("managerIdInput").value = '';
@@ -314,7 +350,10 @@ function displayManIdInput(){
     let isManager = isManagerOption.options[isManagerOption.selectedIndex].value;
     console.log(isManager);
     if(isManager === 'false'){
-        document.getElementById("managerId").style.visibility = 'visibile';
+        document.getElementById("managerId").style.visibility = 'visible';
+    }
+    else{
+        document.getElementById("managerId").style.visibility = 'hidden';
     }
 }
 
@@ -329,7 +368,7 @@ function back(){
     }
     else{
         document.getElementById('activeDisplay').innerHTML = document.getElementById('employeeOptions').innerHTML;
-        document.getElementById('employeeOptions').innerHTML = '';
+        //document.getElementById('employeeOptions').innerHTML = '';
     }
 
     document.getElementById('userInput').innerHTML = "What would you like to do?";

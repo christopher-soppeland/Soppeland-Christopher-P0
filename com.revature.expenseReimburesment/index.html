@@ -105,6 +105,7 @@
                     <input type="text" class="form-control" id="description">
                 </div>
                 <button class="btn btn-success" onclick="submitRequest()" id="submit">Submit</button>
+                <button class="btn btn-success" onclick="back()" id="backBtn">Back</button>
                 <button class="btn btn-danger" onclick="exit()" id="exitBtn">Done</button>
             </div>
             <div class="container" id="viewRequestsInput">
@@ -131,6 +132,7 @@
                     <input type="text" class="form-control" id="inputEmpId">
                 </div>
                 <button class="btn btn-success" onclick="" id="submitFindBy">Submit</button>
+                <button class="btn btn-success" onclick="back()" id="backBtn">Back</button>
                 <button class="btn btn-danger" onclick="exit()" id="exitBtn">Done</button>
                 </div>
             </div>
@@ -164,7 +166,7 @@
                         </select>
                     </div>
                     <div class="container manId" style="visibility:hidden;" id="managerId">
-                        ID or Employee's Manager:<br>
+                        ID of Employee's Manager:<br>
                         <input type="text" class="form-control" id="managerIdInput">
                     </div>
                     <button class="btn btn-success" onclick="addEmployee()" id="submit">Submit</button>
@@ -188,7 +190,7 @@
                     </tbody>
                 </table>
                 <div class="container buttons">
-                    <button class="btn btn-success" onclick="back()" id="updateBtn">Update</button>
+                    <button class="btn btn-success" onclick="back()" id="backBtn">Back</button>
                     <button class="btn btn-danger" onclick="exit()" id="exitBtn">Done</button>
                 </div>
             </div>
