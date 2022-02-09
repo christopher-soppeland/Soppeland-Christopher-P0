@@ -96,7 +96,6 @@ function start(){
         document.getElementById('activeDisplay').innerHTML = document.getElementById('viewRequestsInput').innerHTML;
     }
     else if(selectedAction == "viewYourRequests"){
-        //alert(empId);
         viewYourRequests();
     }
     else if(selectedAction == "viewEmployees"){
@@ -301,11 +300,13 @@ function viewEmployees(){
 
             Object.entries(employees).forEach((employee) => {
                 emp = employee[1];
+                let mId;
+                if(emp.manId!==0){mId=emp.manId}else{mId=''}
                 output += "<tr>";
                 output += '<th scope="row">' + emp.empId + '</th>';
                 output += '<td>' + emp.name + '</td>';
                 output += '<td>' + emp.manager + '</td>';
-                output += '<td>' + emp.manId + '</td>';
+                output += '<td>' + mId + '</td>';
                 output += "</tr>";
             });
 
@@ -320,7 +321,6 @@ function addEmployee(){
     let manId = document.getElementById("managerIdInput").value;
     let isManagerOption = document.getElementById("isManager");
     let isManager = isManagerOption.options[isManagerOption.selectedIndex].value;
-    alert(manId);
 
     url = "http://localhost:7001/AddEmployee";
     xhr = new XMLHttpRequest();

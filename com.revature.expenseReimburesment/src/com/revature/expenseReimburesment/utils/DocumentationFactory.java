@@ -26,28 +26,28 @@ public class DocumentationFactory {
 			}).body(Employee.class).result("201");
 		case "addReimbursement":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).body(Reimbursement.class).result("201");
 		case "changeStatus":
 			return OpenApiBuilder.document().operation(op -> 
 			{
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).pathParam("status", String.class).result("204");
 		case "getRefunds":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).json("200", Reimbursement.class);
 		case "getRefundById":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).json("200", Reimbursement.class);
 		case "getRefundByStatus":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).json("200", Reimbursement.class);
 		case "getByEmpId":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Reimburesment");
+				op.addTagsItem("Reimbursement");
 			}).json("200", Reimbursement.class);
 		default:
 			return null;

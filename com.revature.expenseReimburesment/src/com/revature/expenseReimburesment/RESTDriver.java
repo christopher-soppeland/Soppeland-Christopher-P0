@@ -35,9 +35,9 @@ public class RESTDriver {
 	private static OpenApiOptions getOpenApiOptions() {
 		// Configuring swagger
 		// We'll use swagger for documentation and testing our API
-		Info applicationInfo = new Info().version("1.0").description("Reimburesment System REST");
-		return new OpenApiOptions(applicationInfo).path("/reimburesment-docs")
-				.swagger(new SwaggerOptions("/Reimbursements").title("Reimburesment System API Docs"));
+		Info applicationInfo = new Info().version("1.0").description("Reimbursement System REST");
+		return new OpenApiOptions(applicationInfo).path("/reimbursement-docs")
+				.swagger(new SwaggerOptions("/Reimbursements").title("Reimbursement System API Docs"));
 	}
 
 }
